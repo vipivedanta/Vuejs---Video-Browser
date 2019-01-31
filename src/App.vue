@@ -1,7 +1,7 @@
 <template>
 <div>
 <div>Video Browser</div>
-<SearchBar></SearchBar>
+<SearchBar @termChange="onTermChange"></SearchBar>
 </div>
 </template>
 
@@ -11,6 +11,11 @@ export default{
     name : 'App',
     components : {
         SearchBar : SearchBar
+    },
+    methods : {
+        onTermChange(searchTerm){
+            console.log(searchTerm);
+        }
     }
 }
 </script>
