@@ -2,7 +2,7 @@
 <div class="">
     
     <div class="mt-20">
-        <div class="col-md-6"><SearchBar @clearMsg="clearMsg" @termChange="onTermChange"></SearchBar></div>        
+        <div class="col-md-6"><SearchBar @clearMsg="clearMsg" @termChange="onTermChange"></SearchBar></div> 
     </div>
 
     <div class="mt-20">
@@ -63,6 +63,7 @@ export default{
         },
         clearMsg(){
             this.noItemEntered = false;
+
         }
     }
 }
