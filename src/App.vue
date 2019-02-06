@@ -1,19 +1,26 @@
 <template>
-<div>
-    <h3>Video Browser</h3>
-    <div class="row">
-        
+<div class="">
+    
+    <div class="mt-20">
+        <div class="col-md-6"><SearchBar @termChange="onTermChange"></SearchBar></div>        
     </div>
-    <div class="row">
-        <div class="col-6"><SearchBar @termChange="onTermChange"></SearchBar></div>
-        <div class="col-6"><VideoList :videos="videos"></VideoList></div>
+
+    <div class="mt-20">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-8"><VideoDetail :video="selectedVideo"></VideoDetail></div>
+                <div class="col-md-4"><VideoList :videos="videos" @onVideoSelect="videoSelect"></VideoList></div>
+            </div>
+        </div>
     </div>
+
 </div>
 </template>
 
 <script>
 import SearchBar from './components/SearchBar';
 import VideoList from './components/VideoList';
+import VideoDetail from './components/VideoDetail';
 import axios from 'axios';
 
 const YOUTUBE_DATA_API_KEY = 'AIzaSyCspE3SO1up8-jBCj5dbKHzxfRgM3tR-JA';
@@ -22,11 +29,13 @@ export default{
     name : 'App',
     components : {
         SearchBar : SearchBar,
-        VideoList : VideoList
+        VideoList : VideoList,
+        VideoDetail : VideoDetail
     },
     data(){
         return {
-            videos : []
+            videos : [],
+            selectedVideo : ''
         }
     },
     methods : {
@@ -41,7 +50,16 @@ export default{
             }).then(response => {
                 this.videos = response.data.items;
             });
+        },
+        videoSelect(video){
+            this.selectedVideo = video;
         }
     }
 }
 </script>
+
+<style>
+.mt-20{
+    margin-top:20px;
+}
+</style>
