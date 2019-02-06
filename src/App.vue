@@ -2,13 +2,13 @@
 <div class="">
     
     <div class="mt-20">
-        <div class="col-md-6"><SearchBar @termChange="onTermChange"></SearchBar></div>        
+        <div class="col-md-6"><SearchBar @clearMsg="clearMsg" @termChange="onTermChange"></SearchBar></div>        
     </div>
 
     <div class="mt-20">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-8"><VideoDetail :video="selectedVideo"></VideoDetail></div>
+                <div class="col-md-8"><VideoDetail :noItemEntered="noItemEntered" :video="selectedVideo"></VideoDetail></div>
                 <div class="col-md-4"><VideoList :videos="videos" @onVideoSelect="videoSelect"></VideoList></div>
             </div>
         </div>
@@ -35,11 +35,18 @@ export default{
     data(){
         return {
             videos : [],
-            selectedVideo : ''
+            selectedVideo : '',
+            noItemEntered : false
         }
     },
     methods : {
         onTermChange(searchTerm){
+            if(searchTerm == ''){
+                this.noItemEntered = true;
+                return;
+            }
+
+            this.noItemEntered = false;
             axios.get('https://www.googleapis.com/youtube/v3/search',{
                 params : {
                     key : YOUTUBE_DATA_API_KEY,
@@ -53,6 +60,9 @@ export default{
         },
         videoSelect(video){
             this.selectedVideo = video;
+        },
+        clearMsg(){
+            this.noItemEntered = false;
         }
     }
 }

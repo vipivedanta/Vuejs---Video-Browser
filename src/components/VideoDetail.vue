@@ -1,4 +1,10 @@
 <template>
+<div>
+
+<div v-if="noItemEntered == true" class="col-md-12 alert alert-danger">
+        <p>You haven't typed a word to search..</p>    
+</div> 
+
 <div v-if="video" class="col-md-12">
     <div class="row">
         <div class="embed-responsive embed-responsive-16by9">
@@ -10,12 +16,14 @@
         </div>
     </div>
 </div>
+
+</div>
 </template>
 
 <script>
 export default {
     name : 'VideoDetail',
-    props : ['video'],
+    props : ['video','noItemEntered'],
     computed : {
         videoUrl(){
             const videoId = this.video.id.videoId;

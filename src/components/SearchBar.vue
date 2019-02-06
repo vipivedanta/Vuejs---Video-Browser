@@ -2,7 +2,7 @@
     <div class="col-md-12">
     <div class="row">
         <div class="col-md-9">
-            <input type="text" v-model="keyword" class="form-control" placeholder="Search videos here..." />
+            <input type="text" @input="clearErrorMsg" v-model="keyword" class="form-control" placeholder="Search videos here..." />
         </div>
         <div class="col-md-2">
             <input type="button" value="Search" class="btn btn-info" @click="searchNow"/>
@@ -24,11 +24,10 @@
                 this.$emit('termChange',e.target.value);
             },
             searchNow(){
-                if(this.keyword == ''){
-                    alert('Please type a keyword to search');
-                    return;
-                }
                 this.$emit('termChange',this.keyword);
+            },
+            clearErrorMsg(){
+                this.$emit('clearMsg');
             }
         }
     }
